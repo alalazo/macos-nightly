@@ -19,7 +19,7 @@ jobs:
     - name: spack install
       run: |
         . install_spack.sh
-        spack install gcc
+        spack install -v gcc
 
   install_jupyter_gcc9:
     name: install jupyter with gcc@9.3.0
@@ -31,7 +31,7 @@ jobs:
     - name: spack install
       run: |
         . install_spack.sh
-        spack install py-jupyter %gcc@9.3.0
+        spack install -v py-jupyter %gcc@9.3.0
 
   install_jupyter_clang:
     name: install jupyter with clang
@@ -41,7 +41,7 @@ jobs:
     - name: spack install
       run: |
         . install_spack.sh
-        spack install py-jupyter %clang
+        spack install -v py-jupyter %clang
 
   install_scipy_gcc9:
     name: install scipy with gcc@9.3.0
@@ -53,7 +53,7 @@ jobs:
     - name: spack install
       run: |
         . install_spack.sh
-        spack install py-scipy %gcc@9.3.0
+        spack install -v py-scipy %gcc@9.3.0
 
   install_sympy_gcc9:
     name: install sympy with gcc@9.3.0
@@ -65,7 +65,7 @@ jobs:
     - name: spack install
       run: |
         . install_spack.sh
-        spack install py-sympy %gcc@9.3.0
+        spack install -v py-sympy %gcc@9.3.0
 
   install_mpi4py_gcc9:
     name: install mpi4py with gcc@9.3.0
@@ -77,4 +77,4 @@ jobs:
     - name: spack install
       run: |
         . install_spack.sh
-        spack install py-mpi4py %gcc@9.3.0
+        spack install -v py-mpi4py %gcc@9.3.0
