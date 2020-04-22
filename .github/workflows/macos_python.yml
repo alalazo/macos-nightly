@@ -21,21 +21,24 @@ jobs:
         . install_spack.sh
         spack install -v gcc
 
-  install_jupyter_gcc9:
-    name: install jupyter with gcc@9.3.0
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2
-    - name: install GCC with brew
-      run: brew install gcc && gcc-9 --version
-    - name: spack install
-      run: |
-        . install_spack.sh
-        spack install -v py-jupyter %gcc@9.3.0
+# not even CPython builds
+#   https://github.com/spack/spack/issues/16215#issuecomment-617867163
+#  install_jupyter_gcc9:
+#    name: install jupyter with gcc@9.3.0
+#    runs-on: macos-10.15
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: install GCC with brew
+#      run: brew install gcc && gcc-9 --version
+#    - name: spack install
+#      run: |
+#        . install_spack.sh
+#        spack install -v py-jupyter %gcc@9.3.0
 
   install_jupyter_clang:
     name: install jupyter with clang
     runs-on: macos-10.15
+    timeout-minutes: 600
     steps:
     - uses: actions/checkout@v2
     - name: spack install
@@ -43,26 +46,25 @@ jobs:
         . install_spack.sh
         spack install -v py-jupyter %clang
 
-  install_scipy_gcc9:
-    name: install scipy with gcc@9.3.0
+  # includes numpy, matplotlib, pandas, ...
+  install_scipy_clang:
+    name: install scipy, mpl, pd with clang
     runs-on: macos-10.15
     steps:
     - uses: actions/checkout@v2
-    - name: install GCC with brew
-      run: brew install gcc && gcc-9 --version
     - name: spack install
       run: |
         . install_spack.sh
-        spack install -v py-scipy %gcc@9.3.0
+        spack install -v py-scipy %clang
+        spack install -v py-matplotlib %clang
+        spack install -v py-pandas %clang
 
-  install_mpi4py_gcc9:
-    name: install mpi4py with gcc@9.3.0
+  install_mpi4py_clang:
+    name: install mpi4py with clang
     runs-on: macos-10.15
     steps:
     - uses: actions/checkout@v2
-    - name: install GCC with brew
-      run: brew install gcc && gcc-9 --version
     - name: spack install
       run: |
         . install_spack.sh
-        spack install -v py-mpi4py %gcc@9.3.0
+        spack install -v py-mpi4py %clang
