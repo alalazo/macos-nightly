@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
-git clone --branch=fix-llvmLLDBpy https://github.com/ax3l/spack.git
+git clone https://github.com/spack/spack.git
 . spack/share/spack/setup-env.sh
 spack compilers

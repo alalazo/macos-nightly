@@ -8,59 +8,13 @@ on:
 # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
 jobs:
-  install_gcc:
-    name: install gcc with clang
+  install_qt_clang:
+    name: install qt
     runs-on: macos-10.15
     steps:
     - uses: actions/checkout@v2
     - name: spack install
       run: |
         . install_spack.sh
-        spack install -v gcc
+        spack install -v py-qtconsole %clang
 
-# not even CPython builds
-#   https://github.com/spack/spack/issues/16215#issuecomment-617867163
-#  install_jupyter_gcc9:
-#    name: install jupyter with gcc@9.3.0
-#    runs-on: macos-10.15
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: install GCC with brew
-#      run: brew install gcc && gcc-9 --version
-#    - name: spack install
-#      run: |
-#        . install_spack.sh
-#        spack install -v py-jupyter %gcc@9.3.0
-
-  install_jupyter_clang:
-    name: install jupyter with clang
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2
-    - name: spack install
-      run: |
-        . install_spack.sh
-        spack install -v py-jupyter %clang
-
-  # includes numpy, matplotlib, pandas, ...
-  install_scipy_clang:
-    name: install scipy, mpl, pd with clang
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2
-    - name: spack install
-      run: |
-        . install_spack.sh
-        spack install -v py-scipy %clang
-        spack install -v py-matplotlib %clang
-        spack install -v py-pandas %clang
-
-  install_mpi4py_clang:
-    name: install mpi4py with clang
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2
-    - name: spack install
-      run: |
-        . install_spack.sh
-        spack install -v py-mpi4py %clang
